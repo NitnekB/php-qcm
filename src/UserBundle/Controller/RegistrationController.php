@@ -14,11 +14,16 @@ class RegistrationController extends Controller
 {
     public function index()
     {
-        echo 'Hello world';
+
+        $this->render('UserBundle/Registration/index.html.twig', array(
+            'name' => 'Alexandre'
+        ));
     }
 
     public function toto()
     {
-        echo 'Vous etes dans toto';
+        $this->render('UserBundle/Registration/index.html.twig', array(
+            'name' => 'Quentin'
+        ));
     }
 }

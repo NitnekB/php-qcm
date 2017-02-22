@@ -54,7 +54,7 @@ class Kernel
     {
         $path = $server['REQUEST_URI'];
 
-        $routes = Yaml::parse(file_get_contents(__DIR__ . '/../config/routes.yml'));
+        $routes = Yaml::parse(file_get_contents(__DIR__ . '/config/routes.yml'));
 
         try {
             foreach ($routes as $route) {
