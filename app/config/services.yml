@@ -1,0 +1,2 @@
+routing:
+  class: App\Service\RoutingService

@@ -14,7 +14,6 @@ class RegistrationController extends Controller
 {
     public function index()
     {
-
         $this->render('UserBundle/Registration/index.html.twig', array(
             'name' => 'Alexandre'
         ));
