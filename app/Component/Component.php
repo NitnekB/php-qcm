@@ -6,7 +6,7 @@
  * Time: 15:10
  */
 
-namespace App;
+namespace App\Component;
 
 use App\Service\ServiceBuilder;
 

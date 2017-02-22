@@ -13,7 +13,7 @@ use Symfony\Component\Yaml\Yaml;
  */
 class RoutingService
 {
-    public function redirect($path)
+    public function redirect($path, $params = null)
     {
         $routes = Yaml::parse(file_get_contents(__DIR__ . '/../config/routes.yml'));
         $bundles = Kernel::getBundles();
@@ -25,7 +25,7 @@ class RoutingService
                     $class = $bundles[$controller[0] . ':Controller:' . $controller[1]];
                     $method = $controller[2];
 
-                    $class->$method();
+                    $class->$method($params);
 
                     return;
                 }

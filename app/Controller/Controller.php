@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Controller;
-use App\Component;
+use App\Component\Component;
+use App\Component\Form\AbstractType;
+use App\Component\Form\FormBuilderInterface;
 use Twig_Environment;
 use Twig_Loader_Filesystem;
 
@@ -24,15 +26,28 @@ class Controller extends Component
     {
         $loader = new Twig_Loader_Filesystem(__DIR__.'/../../resources/Views/');
 
-        // todo : dev & prod
+        // todo : prod
         /*$twig = new Twig_Environment($loader, array(
             'cache' => './app/cache',
         ))*/;
 
-        // todo : dev & prod
+        // todo : dev
         $twig = new Twig_Environment($loader, array('auto_reload' => true));
 
         $template = $twig->load($path);
         echo $template->render($vars);
+    }
+
+    /**
+     * Create a form for the specified class and instance
+     *
+     * @param $class
+     * @param $instance
+     */
+    protected function createForm($class, AbstractType $instance)
+    {
+        $formBuilderInterface = new FormBuilderInterface($instance);
+
+        return $instance->buildForm($formBuilderInterface);
     }
 }
