@@ -3,7 +3,7 @@ register:
   controller: UserBundle:RegistrationController:index
   method: get
 
-le_nom_de_ma_route:
+test:
   path: /toto
   controller: UserBundle:RegistrationController:toto
   method: get

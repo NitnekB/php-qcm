@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controller;
+use App\Component;
 use Twig_Environment;
 use Twig_Loader_Filesystem;
 
@@ -11,7 +12,7 @@ use Twig_Loader_Filesystem;
  * Time: 11:21
  *
  */
-class Controller
+class Controller extends Component
 {
     /**
      * Render the view for the controller
