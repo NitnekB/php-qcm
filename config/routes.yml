@@ -1,0 +1,9 @@
+register:
+  path: /register
+  controller: UserBundle:RegistrationController:index
+  method: get
+
+le_nom_de_ma_route:
+  path: /toto
+  controller: UserBundle:RegistrationController:toto
+  method: get
