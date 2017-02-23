@@ -36,6 +36,9 @@ class Controller extends Component
         $pathFunc = new \Twig_Function('path', array($this->get('routing'), 'path'));
         $twig->addFunction($pathFunc);
 
+        $assetFunc = new \Twig_Function('asset', array($this->get('asset-manager'), 'load'));
+        $twig->addFunction($assetFunc);
+
         $template = $twig->load($path);
         echo $template->render($vars);
     }
