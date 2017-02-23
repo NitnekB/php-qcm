@@ -1,0 +1,5 @@
+routing:
+  class: App\Service\RoutingService
+
+session-manager:
+  class: UserBundle\Service\SessionManager
