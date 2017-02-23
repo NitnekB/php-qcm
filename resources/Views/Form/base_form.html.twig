@@ -1,4 +1,4 @@
-<form action="{{ path(form.action, 'post') }}" method="post">
+<form action="{{ path(form.action, 'post') }}" method="post" class="base-form">
     {% for key, value in form.fields %}
         <label>{{ value.label }}</label><br />
         <input name="{{key}}" type="{{ value.type }}"/><br />
