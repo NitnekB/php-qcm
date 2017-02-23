@@ -45,6 +45,8 @@ class UserRepository extends Component
         $qb->setParameter('account', $account);
         $qb->setParameter('password', $password);
 
-        return $qb->getQuery()->getOneOrNullResult();
+        $query = $qb->getQuery();
+
+        return $query->getOneOrNullResult();
     }
 }

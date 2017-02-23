@@ -10,11 +10,50 @@ namespace QcmBundle\Controller;
 
 use App\Controller\Controller;
 use App\Request;
+use App\Service\RoutingService;
 use QcmBundle\Entity\Question;
 use QcmBundle\Entity\Topic;
+use QcmBundle\Type\ReplyType;
 
 class QuestionController extends Controller
 {
+    /**
+     * @param Request $request
+     * @param $params
+     */
+    public function show(Request $request, $params)
+    {
+        $this->requireRole('TEACHER');
+
+        /** @var RoutingService $routing */
+        $routing = $this->get('routing');
+
+        if(!isset($params['topic_id']) || !isset($params['question_id'])) {
+            header('Location: ' . $routing->path('topics', 'get'));
+        }
+
+        $question = $this->entityManager->find('\QcmBundle\Entity\Question', $params['question_id']);
+
+        if (!isset($question)) {
+            header('Location: ' . $routing->path('topics', 'get'));
+        }
+
+        if ($question->getTopic()->getId() != $params['topic_id']) {
+            header('Location: ' . $routing->path('topics', 'get'));
+        }
+
+        $form = new ReplyType();
+        $this->createForm(ReplyType::class, $form);
+
+        $this->render(
+            'QcmBundle/Question/show.html.twig',
+            array(
+                'question' => $question,
+                'form' => $form
+            )
+        );
+    }
+
     /**
      * Create a new question for the specified topic (in path)
      *

@@ -56,11 +56,13 @@ class LoginController extends Controller
             $router->redirect($router->path('login'), $request);
         }
 
+
         $repo = new UserRepository();
         $user = $repo->findBy($account, $password);
 
         if(!isset($user)) {
             $router->redirect($router->path('login'), $request);
+            return;
         } else {
             /** @var SessionManager $sm */
             $sm = $this->get('session-manager');

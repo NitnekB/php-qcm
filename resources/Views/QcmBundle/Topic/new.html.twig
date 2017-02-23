@@ -1,7 +1,5 @@
 {% extends "Layouts/base.html.twig" %}
 
-{{ include('Form/base_form.html.twig') }}
-
 {% block content %}
     <section class="topic">
 
@@ -14,6 +12,8 @@
                 </div>
             </div>
         </div>
+
+        {{ include('Form/base_form.html.twig') }}
 
     </section>
 {% endblock %}

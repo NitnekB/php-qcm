@@ -56,7 +56,7 @@ class User
     private $qcmsCreated;
 
     /**
-     * @ORM\OneToMany(targetEntity="\QcmBundle\Entity\Question", mappedBy="author", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="\QcmBundle\Entity\Question", mappedBy="author")
      */
     private $questions;
 
@@ -76,6 +76,14 @@ class User
         $this->qcmsParticipated = new ArrayCollection();
         $this->replies = new ArrayCollection();
         $this->questions = new ArrayCollection();
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId(int $id)
+    {
+        $this->id = $id;
     }
 
     /**
@@ -225,11 +233,25 @@ class User
     }
 
     /**
-     * @return mixed
+     * @return ArrayCollection
      */
     public function getQuestions()
     {
         return $this->questions;
+    }
+
+    /**
+     * @param \QcmBundle\Entity\Question $question
+     */
+    public function addQuestion($question)
+    {
+        if(!$this->questions->contains($question)) {
+            $this->questions->add($question);
+        }
+
+        if($question->getAuthor() != $this) {
+            $question->setAuthor($this);
+        }
     }
 
     /**
