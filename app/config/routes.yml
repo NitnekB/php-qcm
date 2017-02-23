@@ -1,9 +1,14 @@
 register:
   path: /register
   controller: UserBundle:RegistrationController:index
-  method: get
+  method: GET
 
-le_nom_de_ma_route:
+register_post:
+  path: /register
+  controller: UserBundle:RegistrationController:create
+  method: POST
+
+test:
   path: /toto
   controller: UserBundle:RegistrationController:toto
-  method: get
+  method: GET

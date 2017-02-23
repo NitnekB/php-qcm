@@ -9,16 +9,37 @@
 namespace UserBundle\Controller;
 
 use App\Controller\Controller;
+use App\Request;
+use App\Service\RoutingService;
+use UserBundle\FormType\RegisterType;
 
 class RegistrationController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        echo 'Hello world';
+        $registerType = new RegisterType();
+        $form = $this->createForm(RegisterType::class, $registerType);
+
+        $this->render('UserBundle/Registration/index.html.twig', array(
+            'name' => 'Alexandre',
+            'form' => $form
+        ));
     }
 
-    public function toto()
+    public function create(Request $request)
     {
-        echo 'Vous etes dans toto';
+        if ($request->post['password'] != $request->post['confirmation_password']) {
+            /** @var RoutingService $routingService */
+            $routingService = $this->get('routing');
+            $request->setMethod('get');
+            $routingService->redirect($routingService->path('register', 'get'), $request);
+        }
+    }
+
+    public function toto(Request $request)
+    {
+        $this->render('UserBundle/Registration/index.html.twig', array(
+            'name' => 'Quentin'
+        ));
     }
 }

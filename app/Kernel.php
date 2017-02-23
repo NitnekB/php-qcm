@@ -9,16 +9,16 @@
 
 namespace App;
 
-use ReflectionMethod;
-use Symfony\Component\Yaml\Yaml;
+use App\Component\Component;
 
-class Kernel
+class Kernel extends Component
 {
-    private $bundles;
+    private static $bundles;
 
     public function __construct()
     {
-        $this->bundles = $this->registerBundles();
+        Kernel::$bundles = array();
+        Kernel::$bundles = $this->registerBundles();
     }
 
     /**
@@ -28,11 +28,9 @@ class Kernel
      */
     public function registerBundles()
     {
-        $this->bundles = array();
-
         $this->addBundles(new \UserBundle\Controller\RegistrationController());
 
-        return $this->bundles;
+        return Kernel::$bundles;
     }
 
     /**
@@ -42,7 +40,7 @@ class Kernel
      */
     public function addBundles($bundle)
     {
-        $this->bundles[str_replace('\\', ':', get_class($bundle))] = $bundle;
+        Kernel::$bundles[str_replace('\\', ':', get_class($bundle))] = $bundle;
     }
 
     /**
@@ -54,22 +52,13 @@ class Kernel
     {
         $path = $server['REQUEST_URI'];
 
-        $routes = Yaml::parse(file_get_contents(__DIR__ . '/../config/routes.yml'));
+        $appRequest = new Request($server);
 
-        try {
-            foreach ($routes as $route) {
-                if ($route['path'] === $path) {
-                    $controller = explode(':', $route['controller']);
-                    $class = $this->bundles[$controller[0] . ':Controller:' . $controller[1]];
-                    $method = $controller[2];
+        $this->get('routing')->redirect($path, $appRequest);
+    }
 
-                    $class->$method();
-
-                    return;
-                }
-            }
-        } catch (\Exception $exception) {
-            die($exception->getMessage());
-        }
+    public static function getBundles()
+    {
+        return Kernel::$bundles;
     }
 }
