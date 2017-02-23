@@ -21,7 +21,7 @@ class RoutingService
      */
     public function redirect($path, Request $request)
     {
-        $routes = Yaml::parse(file_get_contents(__DIR__ . '/../config/routes.yml'));
+        $routes = Yaml::parse(file_get_contents(__DIR__ . '/../../config/routes.yml'));
         $bundles = Kernel::getBundles();
 
         try {
@@ -53,7 +53,7 @@ class RoutingService
      */
     public function path($path, $method = null)
     {
-        $routes = Yaml::parse(file_get_contents(__DIR__ . '/../config/routes.yml'));
+        $routes = Yaml::parse(file_get_contents(__DIR__ . '/../../config/routes.yml'));
 
         try {
             $route = $routes[$path];
