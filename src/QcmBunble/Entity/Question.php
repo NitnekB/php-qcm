@@ -24,7 +24,7 @@ class Question
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length="150")
+     * @ORM\Column(name="description", type="string", length=255)
      */
     private $description;
 
@@ -36,6 +36,18 @@ class Question
     private $author;
 
     /**
+     * @OneToOne(targetEntity="Topic")
+     * @JoinColumn(name="topic_id", referencedColumnName="id")
+     */
+    private $topic;
+
+    /**
+     * One Question has Many Replies.
+     * @OneToMany(targetEntity="Reply", mappedBy="question")
+     */
+    private $replies;
+
+    /**
      * Many Questions have Many Qcms.
      * @ManyToMany(targetEntity="Qcm", inversedBy="questions")
      * @JoinTable(name="questions_qcms")
@@ -43,6 +55,7 @@ class Question
     private $qcms;
 
     public function __construct() {
+        $this->replies = new ArrayCollection();
         $this->qcms = new \Doctrine\Common\Collections\ArrayCollection();
     }
 }
