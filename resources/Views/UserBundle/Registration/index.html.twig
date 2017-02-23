@@ -3,17 +3,17 @@
 {% block title %}Registration{% endblock %}
 
 {% block content %}
-    <ul id="navigation">
-
-    </ul>
 
     <section class="register">
-        <div class="reg-pict" style="background-image: url({{ asset('images/pict1.jpg') }}); height: 100vh; width: 100%; background-size: cover;">
-
-            <h1>Registration</h1>
         
-            {{ include('Form/base_form.html.twig') }}
-
+        <div class="reg-pict" style="background-image: url({{ asset('images/pict1.jpg') }}); height: 100vh; width: 100%; background-size: cover;">
+            <div class="container">
+                <h1>Registration</h1>
+                <div class="col-lg-offset-3 col-lg-6">
+                    {{ include('Form/base_form.html.twig') }}
+                </div>
+            </div>
         </div>
+
     </section>
 {% endblock %}
