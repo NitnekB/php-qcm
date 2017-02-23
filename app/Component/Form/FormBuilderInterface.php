@@ -10,6 +10,9 @@ namespace App\Component\Form;
  */
 class FormBuilderInterface
 {
+    /**
+     * @var AbstractType
+     */
     private $class;
 
     /**
@@ -23,19 +26,27 @@ class FormBuilderInterface
 
     /**
      * @param string $name
-     * @param string|null $type
+     * @param mixed $type
      * @param string $label
      * @return $this
      */
-    public function add(string $name, string $type = null, string $label = null)
+    public function add(string $name, $type, string $label = null)
     {
-        $field = new FormField($name, $type, $label);
-
-        $this->class->addField($field);
+        if($type === SubmitButton::class) {
+            $this->class->setSubmit(new SubmitButton($label));
+        } elseif($type === "action") {
+            $this->class->setAction($name);
+        } else {
+            $field = new FormField($name, $type, $label);
+            $this->class->addField($field);
+        }
 
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
     public function getResult()
     {
         return $this->class;

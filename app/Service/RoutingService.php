@@ -13,6 +13,11 @@ use Symfony\Component\Yaml\Yaml;
  */
 class RoutingService
 {
+    /**
+     * redirect to the specified url path
+     * @param $path
+     * @param null $params
+     */
     public function redirect($path, $params = null)
     {
         $routes = Yaml::parse(file_get_contents(__DIR__ . '/../config/routes.yml'));
@@ -31,6 +36,41 @@ class RoutingService
                 }
             }
         } catch (\Exception $exception) {
+            die($exception->getMessage());
+        }
+
+        echo 'Controller not found (to update with 404)';
+    }
+
+    /**
+     * Get the url for the specified path
+     *
+     * @param $path
+     * @param null $method
+     * @return string
+     */
+    public function path($path, $method = null)
+    {
+        $routes = Yaml::parse(file_get_contents(__DIR__ . '/../config/routes.yml'));
+
+        try {
+            $route = $routes[$path];
+
+            if($route == null) {
+                return '/';
+            }
+
+            if($method) {
+                if($method == $route['method']) {
+                    return $route['path'];
+                }
+            } else {
+                return $route['path'];
+            }
+
+            return '/';
+
+        } catch(\Exception $exception) {
             die($exception->getMessage());
         }
     }

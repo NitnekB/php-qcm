@@ -3,6 +3,11 @@ register:
   controller: UserBundle:RegistrationController:index
   method: get
 
+register_post:
+  path: /register
+  controller: UserBundle:RegistrationController:create
+  method: post
+
 test:
   path: /toto
   controller: UserBundle:RegistrationController:toto

@@ -28,11 +28,13 @@ class Controller extends Component
 
         // todo : prod
         /*$twig = new Twig_Environment($loader, array(
-            'cache' => './app/cache',
+            'cache' => './Form/cache',
         ))*/;
 
         // todo : dev
         $twig = new Twig_Environment($loader, array('auto_reload' => true));
+        $pathFunc = new \Twig_Function('path', array($this->get('routing'), 'path'));
+        $twig->addFunction($pathFunc);
 
         $template = $twig->load($path);
         echo $template->render($vars);
