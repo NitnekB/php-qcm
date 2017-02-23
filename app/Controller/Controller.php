@@ -39,6 +39,9 @@ class Controller extends Component
         $assetFunc = new \Twig_Function('asset', array($this->get('asset-manager'), 'load'));
         $twig->addFunction($assetFunc);
 
+        $current_user = new \Twig_Function('get_current_user', array($this->get('session-manager'), 'getCurrentUser'));
+        $twig->addFunction($current_user);
+
         $template = $twig->load($path);
         echo $template->render($vars);
     }
