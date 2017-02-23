@@ -11,6 +11,8 @@ namespace App\Component\Form;
 abstract class AbstractType
 {
     private $fields;
+    private $submit;
+    private $action;
 
     public abstract function buildForm(FormBuilderInterface $builder);
 
@@ -31,5 +33,45 @@ abstract class AbstractType
     public function get(string $fieldName)
     {
         return $this->fields[$fieldName];
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFields()
+    {
+        return $this->fields;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSubmit()
+    {
+        return $this->submit;
+    }
+
+    /**
+     * @param mixed $submit
+     */
+    public function setSubmit($submit)
+    {
+        $this->submit = $submit;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAction()
+    {
+        return $this->action;
+    }
+
+    /**
+     * @param mixed $action
+     */
+    public function setAction($action)
+    {
+        $this->action = $action;
     }
 }

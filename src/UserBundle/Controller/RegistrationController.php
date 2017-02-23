@@ -19,8 +19,6 @@ class RegistrationController extends Controller
         $registerType = new RegisterType();
         $form = $this->createForm(RegisterType::class, $registerType);
 
-        var_dump($form->get('account'));
-
         $this->render('UserBundle/Registration/index.html.twig', array(
             'name' => 'Alexandre',
             'form' => $form

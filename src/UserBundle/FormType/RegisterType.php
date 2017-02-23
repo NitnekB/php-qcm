@@ -4,6 +4,7 @@ namespace UserBundle\FormType;
 
 use App\Component\Form\AbstractType;
 use App\Component\Form\FormBuilderInterface;
+use App\Component\Form\SubmitButton;
 
 /**
  * Created by PhpStorm.
@@ -17,7 +18,9 @@ class RegisterType extends AbstractType
     {
         $builder
             ->add('account', 'text', 'Nom de compte')
-            ->add('password', 'password' , 'Mot de passe');
+            ->add('password', 'password' , 'Mot de passe')
+            ->add('submit', SubmitButton::class, 'S\'enregistrer')
+            ->add('register_post', 'action');
 
         return $builder->getResult();
     }
