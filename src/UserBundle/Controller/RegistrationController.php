@@ -30,6 +30,8 @@ class RegistrationController extends Controller
     public function create(Request $request)
     {
         if ($request->post['password'] != $request->post['confirmation_password']) {
+            unset($request->post['password']);
+            unset($request->post['confirmation_password']);
             /** @var RoutingService $routingService */
             $routingService = $this->get('routing');
             $request->setMethod('get');
