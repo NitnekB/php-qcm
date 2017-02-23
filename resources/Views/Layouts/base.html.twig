@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% block head %}
+            <link rel="stylesheet" href="{{ asset("css/style.css") }}" />
+            <title>{% block title %}{% endblock %} - QCM Eval</title>
+        {% endblock %}
+    </head>
+    <body>
+        <div id="header">
+            <h3>HEADER</h3>
+        </div>
+
+        {% block content %}{% endblock %}
+        
+        <div id="footer">
+            {% block footer %}
+                &copy; Copyright 2011 by <a href="http://domain.invalid/">QCM Eval</a>.
+                <h3>FOOTER</h3>
+            {% endblock %}
+        </div>
+    </body>
+</html>
