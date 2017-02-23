@@ -1,1 +1,16 @@
-Display 'topics'
+{% extends "Layouts/base.html.twig" %}
+
+{% block title %}Topic{% endblock %}
+
+{% block content %}
+    <section class="topic">
+
+        <div class="reg-pict" style="background-image: url({{ asset('images/pict7.jpg') }}); height: 100vh; width: 100%; background-size: cover;">
+            <div class="container">
+                <br />
+                <h1 style="color: whitesmoke;">Thèmes</h1>
+            </div>
+        </div>
+
+    </section>
+{% endblock %}
