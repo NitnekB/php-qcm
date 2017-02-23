@@ -62,8 +62,25 @@ create_question:
   controller: QcmBundle:QuestionController:create
   method: POST
 
+question:
+  path: /topic/:topic_id/question/:question_id
+  controller: QcmBundle:QuestionController:show
+  method: GET
 
 
+############################################################
+####################### REPLY ROUTE ########################
+############################################################
+
+create_reply:
+  path: /topic/:topic_id/question/:question_id/reply/create
+  controller: QcmBundle:ReplyController:create
+  method: POST
+
+
+############################################################
+####################### OTHER ROUTE ########################
+############################################################
 
 home:
   path: /

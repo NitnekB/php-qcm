@@ -38,6 +38,8 @@ class Reply
 
     /**
      * Many Replies have One Question.
+     *
+     * @var Question
      * @ORM\ManyToOne(targetEntity="Question", inversedBy="replies")
      * @ORM\JoinColumn(name="question_id", referencedColumnName="id")
      */
@@ -115,10 +117,14 @@ class Reply
     }
 
     /**
-     * @param mixed $question
+     * @param Question $question
      */
     public function setQuestion($question)
     {
         $this->question = $question;
+
+        if(!$this->question->getReplies()->contains($this)) {
+            $this->question->addReply($this);
+        }
     }
 }

@@ -4,6 +4,7 @@ namespace QcmBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use UserBundle\UserBundle;
 
 /**
  * Question
@@ -31,7 +32,7 @@ class Question
 
     /**
      * Many Users create One Question.
-     * @ORM\ManyToOne(targetEntity="\UserBundle\Entity\User", inversedBy="questions", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="\UserBundle\Entity\User", inversedBy="questions")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id")
      */
     private $author;
@@ -101,15 +102,19 @@ class Question
     }
 
     /**
-     * @param mixed $author
+     * @param \UserBundle\Entity\User $author
      */
     public function setAuthor($author)
     {
         $this->author = $author;
+
+        if(!$author->getQuestions()->contains($this)) {
+            $author->addQuestion($this);
+        }
     }
 
     /**
-     * @return mixed
+     * @return Topic
      */
     public function getTopic()
     {
@@ -125,11 +130,25 @@ class Question
     }
 
     /**
-     * @return mixed
+     * @return ArrayCollection
      */
     public function getReplies()
     {
         return $this->replies;
+    }
+
+    /**
+     * @param Reply $reply
+     */
+    public function addReply($reply)
+    {
+        if(!$this->replies->contains($reply)) {
+            $this->replies->add($reply);
+        }
+
+        if ($reply->getQuestion() != $this) {
+            $reply->setQuestion($this);
+        }
     }
 
     /**

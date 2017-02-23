@@ -4,5 +4,8 @@ routing:
 asset-manager:
   class: App\Service\AssetManager
 
+doctrine:
+  class: App\Service\Doctrine
+
 session-manager:
   class: UserBundle\Service\SessionManager

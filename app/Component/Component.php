@@ -25,26 +25,7 @@ abstract class Component
      */
     public function __construct()
     {
-        $isDevMode = true;
-        $config = Setup::createAnnotationMetadataConfiguration(array(__DIR__."/../../src"), $isDevMode, null, null, false);
-
-        $configPath = __DIR__ . '/../../config/database.yml';
-
-        if(!file_exists($configPath)) {
-            $configPath = $configPath . '.dist';
-        }
-
-        $configDB = Yaml::parse(file_get_contents($configPath));
-
-        $conn = array(
-            'dbname' => $configDB['dbname'],
-            'user' => $configDB['user'],
-            'password' => $configDB['password'],
-            'host' => $configDB['host'],
-            'driver' => $configDB['driver'],
-        );
-
-        $this->entityManager = EntityManager::create($conn, $config);
+        $this->entityManager = $this->get('doctrine')->getEntityManager();
     }
 
     protected function get(string $serviceName)

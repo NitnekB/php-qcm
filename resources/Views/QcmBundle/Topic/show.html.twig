@@ -1,7 +1,7 @@
 {{ topic.label }}<br /><br />
 
 {% for question in topic.questions %}
-    {{ question.description }}<br />
+    <a href="{{ path('question', 'get', { 'topic_id': topic.id, 'question_id': question.id }) }}">{{ question.description }}</a><br />
 {% endfor %}
 
 <br />

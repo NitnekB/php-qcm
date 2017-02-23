@@ -88,8 +88,10 @@ class RoutingService
 
             $routeWithParams = $route['path'];
 
-            foreach($options as $key => $value) {
-                $routeWithParams = str_replace(':' . $key, $value, $routeWithParams);
+            if(isset($options)) {
+                foreach ($options as $key => $value) {
+                    $routeWithParams = str_replace(':' . $key, $value, $routeWithParams);
+                }
             }
 
             if($method) {
