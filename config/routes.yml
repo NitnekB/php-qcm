@@ -50,7 +50,19 @@ create_topic:
 topic:
   path: /topic/:id
   controller: QcmBundle:TopicController:show
-  method: Get
+  method: GET
+
+
+############################################################
+#################### QUESTION ROUTE ########################
+############################################################
+
+create_question:
+  path: /topic/:topic_id/question/create
+  controller: QcmBundle:QuestionController:create
+  method: POST
+
+
 
 
 home:

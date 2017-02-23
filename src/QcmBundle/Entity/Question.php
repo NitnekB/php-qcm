@@ -31,13 +31,13 @@ class Question
 
     /**
      * Many Users create One Question.
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="\UserBundle\Entity\User", inversedBy="questions", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id")
      */
     private $author;
 
     /**
-     * @ORM\OneToOne(targetEntity="Topic")
+     * @ORM\ManyToOne(targetEntity="Topic", inversedBy="questions")
      * @ORM\JoinColumn(name="topic_id", referencedColumnName="id")
      */
     private $topic;

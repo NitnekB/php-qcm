@@ -2,6 +2,7 @@
 
 namespace QcmBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -27,6 +28,19 @@ class Topic
      * @ORM\Column(name="description", type="string", length=150)
      */
     private $label;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Question", mappedBy="topic", cascade={"persist", "remove"})
+     */
+    private $questions;
+
+    /**
+     * Topic constructor.
+     */
+    public function __construct()
+    {
+        $this->questions = new ArrayCollection();
+    }
 
     /**
      * @return int
@@ -58,5 +72,21 @@ class Topic
     public function setLabel(string $label)
     {
         $this->label = $label;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getQuestions()
+    {
+        return $this->questions;
+    }
+
+    /**
+     * @param mixed $questions
+     */
+    public function setQuestions($questions)
+    {
+        $this->questions = $questions;
     }
 }

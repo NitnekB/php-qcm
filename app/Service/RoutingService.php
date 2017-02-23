@@ -26,6 +26,10 @@ class RoutingService
 
         try {
             foreach ($routes as $route) {
+                if(strtolower($request->getMethod()) != strtolower($route['method'])) {
+                    continue;
+                }
+
                 $routeUpper = strtolower($route['path']);
                 $pathUpper = strtolower($path);
 
@@ -82,12 +86,18 @@ class RoutingService
                 return '/';
             }
 
+            $routeWithParams = $route['path'];
+
+            foreach($options as $key => $value) {
+                $routeWithParams = str_replace(':' . $key, $value, $routeWithParams);
+            }
+
             if($method) {
                 if(strtoupper($method) == strtoupper($route['method'])) {
-                    return $route['path'];
+                    return $routeWithParams;
                 }
             } else {
-                return $route['path'];
+                return $routeWithParams;
             }
 
             return '/';
