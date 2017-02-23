@@ -73,6 +73,9 @@ class Controller extends Component
         }
     }
 
+    /**
+     * check if user is logged
+     */
     protected function requireAuthentificated()
     {
         /** @var \UserBundle\Entity\User $user */
@@ -81,5 +84,32 @@ class Controller extends Component
         if(!isset($user)) {
             header('Location: /login');
         }
+    }
+
+    /**
+     * Check for user non authentificated
+     */
+    protected function requireUnAuthentificated()
+    {
+        /** @var \UserBundle\Entity\User $user */
+        $user = $this->get('session-manager')->getCurrentUser();
+
+        if(isset($user)) {
+            header('Location: /login');
+        }
+    }
+
+    /**
+     * Check if the current user have the specified role
+     *
+     * @param string $role
+     * @return bool
+     */
+    protected function checkRole(string $role)
+    {
+        /** @var \UserBundle\Entity\User $user */
+        $user = $this->get('session-manager')->getCurrentUser();
+
+        return $user->getRole() == 'ROLE_'.$role;
     }
 }

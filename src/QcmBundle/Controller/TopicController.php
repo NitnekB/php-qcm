@@ -12,6 +12,7 @@ use App\Controller\Controller;
 use App\Request;
 use QcmBundle\Entity\Topic;
 use QcmBundle\Entity\TopicRepository;
+use QcmBundle\Type\QuestionType;
 use QcmBundle\Type\TopicType;
 use UserBundle\UserBundle;
 
@@ -32,6 +33,32 @@ class TopicController extends Controller
                 'topics' => $topics
             )
         );
+    }
+
+    /**
+     * Show a topic
+     *
+     * @param Request $request
+     * @param $params
+     */
+    public function show(Request $request, $params)
+    {
+        $topic = $this->entityManager->find('\QcmBundle\Entity\Topic', $params['id']);
+
+        if(!isset($topic)) {
+            header('Location: /topics');
+        }
+
+        $response = [];
+        $response['topic'] = $topic;
+
+        if($this->checkRole('TEACHER')) {
+            $form = new QuestionType();
+            $this->createForm(QuestionType::class, $form);
+            $response['form'] = $form;
+        }
+
+        $this->render('QcmBundle/Topic/show.html.twig', $response);
     }
 
     /**

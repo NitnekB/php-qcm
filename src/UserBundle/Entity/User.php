@@ -51,9 +51,14 @@ class User
     private $role;
 
     /**
-     * @ORM\OneToMany(targetEntity="\QcmBundle\Entity\Qcm", mappedBy="author")
+     * @ORM\OneToMany(targetEntity="\QcmBundle\Entity\Qcm", mappedBy="author", cascade={"persist", "remove"})
      */
     private $qcmsCreated;
+
+    /**
+     * @ORM\OneToMany(targetEntity="\QcmBundle\Entity\Question", mappedBy="author", cascade={"persist", "remove"})
+     */
+    private $questions;
 
     /**
      * @ORM\ManyToMany(targetEntity="\QcmBundle\Entity\Reply", mappedBy="users")
@@ -70,6 +75,7 @@ class User
         $this->qcmsCreated = new ArrayCollection();
         $this->qcmsParticipated = new ArrayCollection();
         $this->replies = new ArrayCollection();
+        $this->questions = new ArrayCollection();
     }
 
     /**
@@ -216,5 +222,21 @@ class User
     public function setReplies($replies)
     {
         $this->replies = $replies;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getQuestions()
+    {
+        return $this->questions;
+    }
+
+    /**
+     * @param mixed $questions
+     */
+    public function setQuestions($questions)
+    {
+        $this->questions = $questions;
     }
 }

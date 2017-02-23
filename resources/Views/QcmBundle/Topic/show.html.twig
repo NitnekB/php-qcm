@@ -1,0 +1,18 @@
+{{ topic.label }}<br /><br />
+
+{% for question in topic.questions %}
+    {{ question.description }}<br />
+{% endfor %}
+
+<br />
+
+<form action="{{ path(form.action, 'post', { 'topic_id': topic.id }) }}" method="post" class="base-form">
+    {% for key, value in form.fields %}
+        <label>{{ value.label }}</label><br />
+        <input name="{{key}}" type="{{ value.type }}"/><br />
+    {% endfor %}
+
+    {% if form.submit %}
+        <input type="submit" value="{{ form.submit.label }}"/>
+    {% endif %}
+</form>

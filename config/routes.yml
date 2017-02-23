@@ -47,6 +47,22 @@ create_topic:
   controller: QcmBundle:TopicController:createTopic
   method: POST
 
+topic:
+  path: /topic/:id
+  controller: QcmBundle:TopicController:show
+  method: GET
+
+
+############################################################
+#################### QUESTION ROUTE ########################
+############################################################
+
+create_question:
+  path: /topic/:topic_id/question/create
+  controller: QcmBundle:QuestionController:create
+  method: POST
+
+
 
 
 home:
