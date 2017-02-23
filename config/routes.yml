@@ -1,3 +1,7 @@
+############################################################
+####################### USER ROUTE #########################
+############################################################
+
 register:
   path: /register
   controller: UserBundle:RegistrationController:index
@@ -8,7 +12,50 @@ register_post:
   controller: UserBundle:RegistrationController:create
   method: POST
 
+login:
+  path: /login
+  controller: UserBundle:LoginController:index
+  method: GET
+
+login_post:
+  path: /login
+  controller: UserBundle:LoginController:create
+  method: POST
+
+logout:
+  path: /logout
+  controller: UserBundle:LoginController:logout
+  method: GET
+
+
+############################################################
+###################### TOPIC ROUTE #########################
+############################################################
+
+topics:
+  path: /topics
+  controller: QcmBundle:TopicController:index
+  method: GET
+
+new_topic:
+  path: /topic/new
+  controller: QcmBundle:TopicController:newTopic
+  method: GET
+
+create_topic:
+  path: /topic/create
+  controller: QcmBundle:TopicController:createTopic
+  method: POST
+
+
+
+home:
+  path: /
+  controller: QcmBundle:DefaultController:index
+  method: GET
+
 test:
   path: /toto
   controller: UserBundle:RegistrationController:toto
   method: GET
+
