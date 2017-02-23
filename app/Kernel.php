@@ -29,6 +29,9 @@ class Kernel extends Component
     public function registerBundles()
     {
         $this->addBundles(new \UserBundle\Controller\RegistrationController());
+        $this->addBundles(new \UserBundle\Controller\LoginController());
+        $this->addBundles(new \QcmBundle\Controller\DefaultController());
+        $this->addBundles(new \QcmBundle\Controller\TopicController());
 
         return Kernel::$bundles;
     }

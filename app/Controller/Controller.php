@@ -55,4 +55,31 @@ class Controller extends Component
 
         return $instance->buildForm($formBuilderInterface);
     }
+
+    /**
+     * @param string $role
+     */
+    protected function requireRole(string $role)
+    {
+        /** @var \UserBundle\Entity\User $user */
+        $user = $this->get('session-manager')->getCurrentUser();
+
+        if(!isset($user)) {
+            header('Location: /login');
+        }
+
+        if($user->getRole() != 'ROLE_'.$role) {
+            header('Location: /');
+        }
+    }
+
+    protected function requireAuthentificated()
+    {
+        /** @var \UserBundle\Entity\User $user */
+        $user = $this->get('session-manager')->getCurrentUser();
+
+        if(!isset($user)) {
+            header('Location: /login');
+        }
+    }
 }

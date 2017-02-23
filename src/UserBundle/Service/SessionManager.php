@@ -14,20 +14,27 @@ use UserBundle\Entity\User;
 class SessionManager extends Component
 {
     /**
-     * @param $session
      * @return User
      */
-    public function getUser($session)
+    public function getCurrentUser()
     {
-        $userId = $session['user_id'];
-
-        if($userId == null) {
+        if(!isset($_SESSION['user_id'])) {
             return null;
         }
 
+        $userId = $_SESSION['user_id'];
+
         /** @var User $user */
-        $user = $this->entityManager->find('User', $session['user_id']);
+        $user = $this->entityManager->find('\UserBundle\Entity\User', $userId);
 
         return $user;
+    }
+
+    /**
+     * @param \UserBundle\Entity\User $user
+     */
+    public function setUser($user)
+    {
+        $_SESSION['user_id'] = $user->getId();
     }
 }
