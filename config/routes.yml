@@ -47,6 +47,10 @@ create_topic:
   controller: QcmBundle:TopicController:createTopic
   method: POST
 
+topic:
+  path: /topic/:id
+  controller: QcmBundle:TopicController:show
+  method: Get
 
 
 home:

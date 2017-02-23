@@ -35,6 +35,25 @@ class TopicController extends Controller
     }
 
     /**
+     * Show a topic
+     *
+     * @param Request $request
+     * @param $params
+     */
+    public function show(Request $request, $params)
+    {
+        $topic = $this->entityManager->find('\QcmBundle\Entity\Topic', $params['id']);
+
+        if(!isset($topic)) {
+            header('Location: /topics');
+        }
+
+        $this->render('QcmBundle/Topic/show.html.twig', array(
+            'topic' => $topic
+        ));
+    }
+
+    /**
      * Prepare request for create a new topic
      *
      * @param Request $request
