@@ -11,7 +11,9 @@ namespace App;
 
 class Request
 {
-    private $get;
+    public $get;
+    public $post;
+
     private $method;
     private $contentType;
     private $httpAcceptLanguage;
@@ -28,14 +30,8 @@ class Request
         $this->contentType = $server['CONTENT_TYPE'];
         $this->httpAcceptLanguage = $server['HTTP_ACCEPT_LANGUAGE'];
         $this->remoteAddress = $server['REMOTE_ADDR'];
-    }
 
-    /**
-     * @return mixed
-     */
-    public function getGet()
-    {
-        return $this->get;
+        $this->post = $_POST;
     }
 
     /**
@@ -44,6 +40,14 @@ class Request
     public function getMethod()
     {
         return $this->method;
+    }
+
+    /**
+     * @param mixed $method
+     */
+    public function setMethod($method)
+    {
+        $this->method = $method;
     }
 
     /**

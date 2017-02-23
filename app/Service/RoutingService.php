@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Kernel;
+use App\Request;
 use Symfony\Component\Yaml\Yaml;
 
 /**
@@ -16,21 +17,22 @@ class RoutingService
     /**
      * redirect to the specified url path
      * @param $path
-     * @param null $params
+     * @param Request $request
      */
-    public function redirect($path, $params = null)
+    public function redirect($path, Request $request)
     {
         $routes = Yaml::parse(file_get_contents(__DIR__ . '/../config/routes.yml'));
         $bundles = Kernel::getBundles();
 
         try {
             foreach ($routes as $route) {
-                if ($route['path'] === $path) {
+                if (strtoupper($route['path']) === strtoupper($path)
+                    && strtoupper($request->getMethod()) === strtoupper($route['method'])) {
                     $controller = explode(':', $route['controller']);
                     $class = $bundles[$controller[0] . ':Controller:' . $controller[1]];
                     $method = $controller[2];
 
-                    $class->$method($params);
+                    $class->$method($request);
 
                     return;
                 }
@@ -61,7 +63,7 @@ class RoutingService
             }
 
             if($method) {
-                if($method == $route['method']) {
+                if(strtoupper($method) == strtoupper($route['method'])) {
                     return $route['path'];
                 }
             } else {

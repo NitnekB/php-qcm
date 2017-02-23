@@ -10,6 +10,7 @@ namespace UserBundle\Controller;
 
 use App\Controller\Controller;
 use App\Request;
+use App\Service\RoutingService;
 use UserBundle\FormType\RegisterType;
 
 class RegistrationController extends Controller
@@ -23,6 +24,16 @@ class RegistrationController extends Controller
             'name' => 'Alexandre',
             'form' => $form
         ));
+    }
+
+    public function create(Request $request)
+    {
+        if ($request->post['password'] != $request->post['confirmation_password']) {
+            /** @var RoutingService $routingService */
+            $routingService = $this->get('routing');
+            $request->setMethod('get');
+            $routingService->redirect($routingService->path('register', 'get'), $request);
+        }
     }
 
     public function toto(Request $request)
