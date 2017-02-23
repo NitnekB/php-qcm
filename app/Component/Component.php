@@ -26,7 +26,7 @@ abstract class Component
     public function __construct()
     {
         $isDevMode = true;
-        $config = Setup::createAnnotationMetadataConfiguration(array(__DIR__."/../src"), $isDevMode);
+        $config = Setup::createAnnotationMetadataConfiguration(array(__DIR__."/../../src"), $isDevMode, null, null, false);
 
         $configPath = __DIR__ . '/../../config/database.yml';
 
