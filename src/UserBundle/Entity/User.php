@@ -2,6 +2,7 @@
 
 namespace UserBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -48,6 +49,28 @@ class User
      * @ORM\Column(name="role", type="string", length=100)
      */
     private $role;
+
+    /**
+     * @ORM\OneToMany(targetEntity="\QcmBundle\Entity\Qcm", mappedBy="author")
+     */
+    private $qcmsCreated;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="\QcmBundle\Entity\Reply", mappedBy="users")
+     */
+    private $replies;
+
+    private $qcmsParticipated;
+
+    /**
+     * User constructor.
+     */
+    public function __construct()
+    {
+        $this->qcmsCreated = new ArrayCollection();
+        $this->qcmsParticipated = new ArrayCollection();
+        $this->replies = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -145,5 +168,53 @@ class User
     {
         $this->role = $role;
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getQcmsCreated()
+    {
+        return $this->qcmsCreated;
+    }
+
+    /**
+     * @param ArrayCollection $qcmsCreated
+     */
+    public function setQcmsCreated($qcmsCreated)
+    {
+        $this->qcmsCreated = $qcmsCreated;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getQcmsParticipated()
+    {
+        return $this->qcmsParticipated;
+    }
+
+    /**
+     * @param mixed $qcmsParticipated
+     */
+    public function setQcmsParticipated($qcmsParticipated)
+    {
+        $this->qcmsParticipated = $qcmsParticipated;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getReplies()
+    {
+        return $this->replies;
+    }
+
+    /**
+     * @param mixed $replies
+     */
+    public function setReplies($replies)
+    {
+        $this->replies = $replies;
     }
 }

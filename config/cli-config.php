@@ -8,9 +8,9 @@ use Symfony\Component\Yaml\Yaml;
 require_once 'app/autoload.php';
 
 $isDevMode = true;
-$config = Setup::createAnnotationMetadataConfiguration(array(__DIR__ . "/src"), $isDevMode, null, null, false);
+$config = Setup::createAnnotationMetadataConfiguration(array(__DIR__ . "/../src"), $isDevMode, null, null, false);
 
-$configPath = __DIR__ . '/app/config/database.yml';
+$configPath = __DIR__ . '/database.yml';
 
 if(!file_exists($configPath)) {
     $configPath = $configPath . '.dist';
