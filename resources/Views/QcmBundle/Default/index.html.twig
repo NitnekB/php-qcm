@@ -1,1 +1,14 @@
-Hello from index
+{% extends "Layouts/base.html.twig" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <section class="home">
+        <div class="reg-pict" style="background-image: url({{ asset('images/pict6.jpg') }}); height: 100vh; width: 100%; background-size: cover;">
+            <div class="container">
+                <br />
+                <h1>Bienvenue sur le site d'<strong>Eval QCM</strong></h1>
+            </div>
+        </div>
+    </section>
+{% endblock %}
