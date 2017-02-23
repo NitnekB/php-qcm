@@ -9,6 +9,8 @@
 
 namespace App;
 
+use App\Component\Component;
+
 class Kernel extends Component
 {
     private static $bundles;
@@ -50,7 +52,9 @@ class Kernel extends Component
     {
         $path = $server['REQUEST_URI'];
 
-        $this->get('routing')->redirect($path);
+        $appRequest = new Request($server);
+
+        $this->get('routing')->redirect($path, $appRequest);
     }
 
     public static function getBundles()
