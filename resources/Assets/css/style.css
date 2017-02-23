@@ -111,3 +111,7 @@ section.register {
     background-color: whitesmoke;
     height: 100%;
 }
+
+section.topic {
+    background-color: #fafafa;
+}

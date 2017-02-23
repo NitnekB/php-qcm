@@ -5,4 +5,4 @@ app/cache
 vendor
 
 # Personal config
-app/config/database.yml
+/config/database.yml
