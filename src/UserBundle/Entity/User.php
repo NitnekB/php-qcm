@@ -24,28 +24,28 @@ class User
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length="150")
+     * @ORM\Column(name="name", type="string", length=150)
      */
     private $name;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length="100")
+     * @ORM\Column(name="email", type="string", length=100)
      */
     private $email;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="password", type="string", length="100")
+     * @ORM\Column(name="password", type="string", length=100)
      */
     private $password;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="role", type="string", length="100")
+     * @ORM\Column(name="role", type="string", length=100)
      */
     private $role;
 
@@ -84,7 +84,7 @@ class User
     /**
      * Get email
      *
-     * @return User
+     * @return string
      */
     public function getEmail()
     {
@@ -106,7 +106,7 @@ class User
     /**
      * Get password
      *
-     * @return User
+     * @return string
      */
     public function getPassword()
     {
@@ -128,7 +128,7 @@ class User
     /**
      * Get role
      *
-     * @return User
+     * @return string
      */
     public function getRole()
     {

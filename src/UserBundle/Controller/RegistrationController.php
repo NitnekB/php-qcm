@@ -11,6 +11,7 @@ namespace UserBundle\Controller;
 use App\Controller\Controller;
 use App\Request;
 use App\Service\RoutingService;
+use UserBundle\Entity\User;
 use UserBundle\FormType\RegisterType;
 
 class RegistrationController extends Controller
@@ -33,6 +34,7 @@ class RegistrationController extends Controller
             $routingService = $this->get('routing');
             $request->setMethod('get');
             $routingService->redirect($routingService->path('register', 'get'), $request);
+            return;
         }
     }
 
