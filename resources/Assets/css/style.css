@@ -9,14 +9,15 @@
     width: 100%;
     text-align: center;
     padding: 100px;
+    margin-top: 150px;
+}
+
+html {
+    background-color: #4c4c4c;
 }
 
 .clear {
   clear: both;
-}
-
-h1 {
-    text-align: center;
 }
 
 #header {
