@@ -27,12 +27,18 @@
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
+                        {% if get_current_user() == null %}
                         <li>
-                            <a class="page-scroll" href="/login">Connexion</a>
+                            <a class="page-scroll" href="{{ path('login') }}">Connexion</a>
                         </li>
                         <li>
-                            <a class="page-scroll" href="/register">S'inscrire</a>
+                            <a class="page-scroll" href="{{ path('register') }}">S'inscrire</a>
                         </li>
+                        {% else %}
+                            <li>
+                                <a class="page-scroll" href="{{ path('logout') }}">Se déconnecter</a>
+                            </li>
+                        {% endif %}
                     </ul>
                 </div>
             </nav>
