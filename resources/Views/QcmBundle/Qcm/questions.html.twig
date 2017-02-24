@@ -1,8 +1,26 @@
-{{ qcm.description }}<br />
-Difficulté : {{ qcm.difficulty }}<br />
-Topic : {{ topic.label }}<br /><br />
+{% extends "Layouts/base.html.twig" %}
 
-{% for question in questions %}
-    {% set params = {'qcm_id': qcm.id, 'topic_id': topic.id, 'question_id': question.id } %}
-    <a href="{{ path('qcm_add_question', 'get', params) }}">{{ question.description }}</a><br />
-{% endfor %}
+
+{% block content %}
+    <section class="topic">
+        <div class="reg-pict" style="background-image: url({{ asset('images/pict6.jpg') }}); height: 100vh; width: 100%; background-size: cover;">
+            <div class="container">
+                <div class="white-screen">
+                <h1>Sélectionner vos questions</h1>
+                <br />
+                <hr>
+                <p>Nom du QCM : {{ qcm.description }}</p>
+                <br />
+                <p>Difficulté : {{ qcm.difficulty }}</p>
+                <br />
+                <p>Topic : {{ topic.label }}</p>
+
+                {% for question in questions %}
+                    {% set params = {'qcm_id': qcm.id, 'topic_id': topic.id, 'question_id': question.id } %}
+                    <a href="{{ path('qcm_add_question', 'get', params) }}">{{ question.description }}</a><br />
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
