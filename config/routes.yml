@@ -79,6 +79,45 @@ create_reply:
 
 
 ############################################################
+######################## QCM ROUTE #########################
+############################################################
+
+qcms:
+  path: /qcms
+  controller: QcmBundle:QcmController:index
+  method: GET
+
+create_qcm:
+  path: /qcm/create
+  controller: QcmBundle:QcmController:create
+  method: POST
+
+new_qcm:
+  path: /qcm/new
+  controller: QcmBundle:QcmController:newQcm
+  method: GET
+
+qcm:
+  path: /qcm/:id
+  controller: QcmBundle:QcmController:show
+  method: GET
+
+qcm_topics:
+  path: /qcm/:qcm_id/topics
+  controller: QcmBundle:QcmController:topics
+  method: GET
+
+qcm_questions:
+  path: /qcm/:qcm_id/topic/:topic_id/questions
+  controller: QcmBundle:QcmController:questions
+  method: GET
+
+qcm_add_question:
+  path: /qcm/:qcm_id/topic/:topic_id/question/:question_id
+  controller: QcmBundle:QcmController:addQuestion
+  method: GET
+
+############################################################
 ####################### OTHER ROUTE ########################
 ############################################################
 

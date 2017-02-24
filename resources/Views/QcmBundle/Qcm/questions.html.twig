@@ -1,0 +1,8 @@
+{{ qcm.description }}<br />
+Difficulté : {{ qcm.difficulty }}<br />
+Topic : {{ topic.label }}<br /><br />
+
+{% for question in questions %}
+    {% set params = {'qcm_id': qcm.id, 'topic_id': topic.id, 'question_id': question.id } %}
+    <a href="{{ path('qcm_add_question', 'get', params) }}">{{ question.description }}</a><br />
+{% endfor %}

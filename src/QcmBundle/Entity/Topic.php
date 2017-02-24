@@ -75,7 +75,7 @@ class Topic
     }
 
     /**
-     * @return mixed
+     * @return ArrayCollection
      */
     public function getQuestions()
     {
