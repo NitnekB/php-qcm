@@ -13,13 +13,23 @@
                     Difficulté : {{ qcm.difficulty }}<br /><br />
 
                     {% for question in qcm.questions %}
-                        Themes : {{ question.topic.label }}<br />
-                        Question : {{ question.description }}<br />
                         <a href="{{ path('question', 'get', {'topic_id': question.topic.id, 'question_id': question.id}) }}">
-                            Editer
+                            {% if loop.first %}
+                            <div class="line line-first">
+                                {% else %}
+                                <div class="line">
+                                    {% endif %}
+                                    <h5 style="color: #444;">
+                                        Themes : {{ question.topic.label }}
+                                    </h5>
+                                    <h4 style="color: #333;">
+                                        Question : {{ question.description }}
+                                    </h4>
+                                </div>
                         </a>
-                        <br /><br />
                     {% endfor %}
+
+                    <br /><br />
 
                     <a class="button-style" href="{{ path('qcm_topics', 'get', {'qcm_id': qcm.id }) }}">Ajouter une question</a>
                 </div>
