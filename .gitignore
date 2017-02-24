@@ -3,3 +3,6 @@ app/cache
 
 # Vendor use for the project
 vendor
+
+# Personal config
+/config/database.yml

@@ -8,7 +8,6 @@
 
 namespace App;
 
-
 class Request
 {
     public $get;
@@ -18,6 +17,7 @@ class Request
     private $contentType;
     private $httpAcceptLanguage;
     private $remoteAddress;
+    private $session;
 
     /**
      * Request constructor.
@@ -32,6 +32,7 @@ class Request
         $this->remoteAddress = $server['REMOTE_ADDR'];
 
         $this->post = $_POST;
+        $this->session = $_SESSION;
     }
 
     /**
@@ -58,4 +59,11 @@ class Request
         return $this->contentType;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getSession()
+    {
+        return $this->session;
+    }
 }

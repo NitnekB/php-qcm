@@ -9,9 +9,25 @@
 namespace App\Component;
 
 use App\Service\ServiceBuilder;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Tools\Setup;
+use Symfony\Component\Yaml\Yaml;
 
-class Component
+abstract class Component
 {
+    /**
+     * @var EntityManager
+     */
+    protected $entityManager;
+
+    /**
+     * Component constructor.
+     */
+    public function __construct()
+    {
+        $this->entityManager = $this->get('doctrine')->getEntityManager();
+    }
+
     protected function get(string $serviceName)
     {
         $serviceBuilder = new ServiceBuilder();

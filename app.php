@@ -6,10 +6,11 @@
  * Time: 08:50
  */
 
+session_start();
+
 /** @var \Composer\Autoload\ClassLoader $loader */
 $loader = require __DIR__ . '/app/autoload.php';
 
 $kernel = new App\Kernel();
 
 $kernel->handle($_SERVER, $_REQUEST);
-

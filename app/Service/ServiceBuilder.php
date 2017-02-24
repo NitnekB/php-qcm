@@ -20,12 +20,12 @@ class ServiceBuilder
      */
     public function __construct()
     {
-        $this->services = Yaml::parse(file_get_contents(__DIR__ . '/../config/services.yml'));
+        $this->services = Yaml::parse(file_get_contents(__DIR__ . '/../../config/services.yml'));
     }
 
     /**
      * @param string $serviceName
-     * @return
+     * @return null|object
      */
     public function build(string $serviceName)
     {

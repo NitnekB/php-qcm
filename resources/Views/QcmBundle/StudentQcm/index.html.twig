@@ -1,0 +1,4 @@
+{% for qcm in qcms %}
+    {{ qcm.description }}
+    <a href="{{ path('student_qcm', 'get', {'id': qcm.id}) }}">Faire le QCM</a> <br />
+{% endfor %}

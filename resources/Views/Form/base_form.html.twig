@@ -1,10 +1,10 @@
-<form action="{{ path(form.action, 'post') }}" method="post">
+<form action="{{ path(form.action, 'post') }}" method="post" class="base-form">
     {% for key, value in form.fields %}
         <label>{{ value.label }}</label><br />
-        <input name="{{key}}" type="{{ value.type }}"/><br />
+        <input class="form-input" name="{{key}}" type="{{ value.type }}"/><br />
     {% endfor %}
 
     {% if form.submit %}
-        <input type="submit" value="{{ form.submit.label }}"/>
+        <input class="form-but" type="submit" value="{{ form.submit.label }}"/>
     {% endif %}
 </form>

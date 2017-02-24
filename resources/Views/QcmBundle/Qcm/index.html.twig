@@ -1,0 +1,4 @@
+{% for qcm in qcms %}
+    {{ qcm.description }} | {{ qcm.difficulty }}
+    <a href="{{ path('qcm', 'get', {'id': qcm.id}) }}">Editer</a> <br />
+{% endfor %}

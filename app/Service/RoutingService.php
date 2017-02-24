@@ -21,19 +21,43 @@ class RoutingService
      */
     public function redirect($path, Request $request)
     {
-        $routes = Yaml::parse(file_get_contents(__DIR__ . '/../config/routes.yml'));
+        $routes = Yaml::parse(file_get_contents(__DIR__ . '/../../config/routes.yml'));
         $bundles = Kernel::getBundles();
 
         try {
             foreach ($routes as $route) {
-                if (strtoupper($route['path']) === strtoupper($path)
-                    && strtoupper($request->getMethod()) === strtoupper($route['method'])) {
+                if(strtolower($request->getMethod()) != strtolower($route['method'])) {
+                    continue;
+                }
+
+                $routeUpper = strtolower($route['path']);
+                $pathUpper = strtolower($path);
+
+                $routeExploded = explode('/', $routeUpper);
+                $pathExploded = explode('/', $pathUpper);
+
+                if (count($routeExploded) != count($pathExploded)) {
+                    continue;
+                }
+
+                $match = true;
+                $params = [];
+                for($i = 1; $i < count($routeExploded); $i++) {
+                    if(strlen($routeExploded[$i]) > 0) {
+                        if ($routeExploded[$i][0] == ':') {
+                            $params[ltrim($routeExploded[$i], ':')] = $pathExploded[$i];
+                        } else if($routeExploded[$i] != $pathExploded[$i]) {
+                            $match = false;
+                        }
+                    }
+                }
+
+                if($match) {
                     $controller = explode(':', $route['controller']);
                     $class = $bundles[$controller[0] . ':Controller:' . $controller[1]];
                     $method = $controller[2];
 
-                    $class->$method($request);
-
+                    $class->$method($request, $params);
                     return;
                 }
             }
@@ -51,9 +75,9 @@ class RoutingService
      * @param null $method
      * @return string
      */
-    public function path($path, $method = null)
+    public function path($path, $method = null, $options = null)
     {
-        $routes = Yaml::parse(file_get_contents(__DIR__ . '/../config/routes.yml'));
+        $routes = Yaml::parse(file_get_contents(__DIR__ . '/../../config/routes.yml'));
 
         try {
             $route = $routes[$path];
@@ -62,12 +86,20 @@ class RoutingService
                 return '/';
             }
 
+            $routeWithParams = $route['path'];
+
+            if(isset($options)) {
+                foreach ($options as $key => $value) {
+                    $routeWithParams = str_replace(':' . $key, $value, $routeWithParams);
+                }
+            }
+
             if($method) {
                 if(strtoupper($method) == strtoupper($route['method'])) {
-                    return $route['path'];
+                    return $routeWithParams;
                 }
             } else {
-                return $route['path'];
+                return $routeWithParams;
             }
 
             return '/';

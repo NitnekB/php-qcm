@@ -28,7 +28,16 @@ class Kernel extends Component
      */
     public function registerBundles()
     {
+        // todo : load bundle and not Controllers
+
         $this->addBundles(new \UserBundle\Controller\RegistrationController());
+        $this->addBundles(new \UserBundle\Controller\LoginController());
+        $this->addBundles(new \QcmBundle\Controller\DefaultController());
+        $this->addBundles(new \QcmBundle\Controller\TopicController());
+        $this->addBundles(new \QcmBundle\Controller\QuestionController());
+        $this->addBundles(new \QcmBundle\Controller\ReplyController());
+        $this->addBundles(new \QcmBundle\Controller\QcmController());
+        $this->addBundles(new \QcmBundle\Controller\StudentQcmController());
 
         return Kernel::$bundles;
     }

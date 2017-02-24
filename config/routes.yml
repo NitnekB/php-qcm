@@ -1,0 +1,151 @@
+############################################################
+####################### USER ROUTE #########################
+############################################################
+
+register:
+  path: /register
+  controller: UserBundle:RegistrationController:index
+  method: GET
+
+register_post:
+  path: /register
+  controller: UserBundle:RegistrationController:create
+  method: POST
+
+login:
+  path: /login
+  controller: UserBundle:LoginController:index
+  method: GET
+
+login_post:
+  path: /login
+  controller: UserBundle:LoginController:create
+  method: POST
+
+logout:
+  path: /logout
+  controller: UserBundle:LoginController:logout
+  method: GET
+
+
+############################################################
+###################### TOPIC ROUTE #########################
+############################################################
+
+topics:
+  path: /topics
+  controller: QcmBundle:TopicController:index
+  method: GET
+
+new_topic:
+  path: /topic/new
+  controller: QcmBundle:TopicController:newTopic
+  method: GET
+
+create_topic:
+  path: /topic/create
+  controller: QcmBundle:TopicController:createTopic
+  method: POST
+
+topic:
+  path: /topic/:id
+  controller: QcmBundle:TopicController:show
+  method: GET
+
+
+############################################################
+#################### QUESTION ROUTE ########################
+############################################################
+
+create_question:
+  path: /topic/:topic_id/question/create
+  controller: QcmBundle:QuestionController:create
+  method: POST
+
+question:
+  path: /topic/:topic_id/question/:question_id
+  controller: QcmBundle:QuestionController:show
+  method: GET
+
+
+############################################################
+####################### REPLY ROUTE ########################
+############################################################
+
+create_reply:
+  path: /topic/:topic_id/question/:question_id/reply/create
+  controller: QcmBundle:ReplyController:create
+  method: POST
+
+
+############################################################
+######################## QCM ROUTE #########################
+############################################################
+
+qcms:
+  path: /qcms
+  controller: QcmBundle:QcmController:index
+  method: GET
+
+create_qcm:
+  path: /qcm/create
+  controller: QcmBundle:QcmController:create
+  method: POST
+
+new_qcm:
+  path: /qcm/new
+  controller: QcmBundle:QcmController:newQcm
+  method: GET
+
+qcm:
+  path: /qcm/:id
+  controller: QcmBundle:QcmController:show
+  method: GET
+
+qcm_topics:
+  path: /qcm/:qcm_id/topics
+  controller: QcmBundle:QcmController:topics
+  method: GET
+
+qcm_questions:
+  path: /qcm/:qcm_id/topic/:topic_id/questions
+  controller: QcmBundle:QcmController:questions
+  method: GET
+
+qcm_add_question:
+  path: /qcm/:qcm_id/topic/:topic_id/question/:question_id
+  controller: QcmBundle:QcmController:addQuestion
+  method: GET
+
+
+######################## STUDENT ###########################
+
+student_qcms:
+  path: /student/qcms
+  controller: QcmBundle:StudentQcmController:index
+  method: GET
+
+student_qcm:
+  path: /student/qcm/:id
+  controller: QcmBundle:StudentQcmController:show
+  method: GET
+
+student_qcm_response:
+  path: /student/qcm/:id/question/:question_id/response/:reply_id
+  controller: QcmBundle:StudentQcmController:response
+  method: GET
+
+############################################################
+####################### OTHER ROUTE ########################
+############################################################
+
+home:
+  path: /
+  controller: QcmBundle:DefaultController:index
+  method: GET
+
+test:
+  path: /toto
+  controller: UserBundle:RegistrationController:toto
+  method: GET
+
