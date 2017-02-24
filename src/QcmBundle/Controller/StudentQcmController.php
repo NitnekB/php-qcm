@@ -13,6 +13,7 @@ use App\Request;
 use App\Service\RoutingService;
 use QcmBundle\Entity\QcmRepository;
 use QcmBundle\Entity\Reply;
+use UserBundle\Entity\User;
 use UserBundle\Service\SessionManager;
 
 class StudentQcmController extends Controller
@@ -25,13 +26,24 @@ class StudentQcmController extends Controller
     {
         $this->requireRole('STUDENT');
 
+        /** @var User $user */
+        $user = $this->get('session-manager')->getCurrentUser();
+
         $repo = new QcmRepository();
         $qcms = $repo->findAll();
+
+        $currentQcms=[];
+
+        foreach ($qcms as $qcm) {
+            if(!$user->getQcmsCompleted()->contains($qcm)) {
+                $currentQcms[] = $qcm;
+            }
+        }
 
         $this->render(
             'QcmBundle/StudentQcm/index.html.twig',
             array(
-                'qcms' => $qcms
+                'qcms' => $currentQcms
             )
         );
     }

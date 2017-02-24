@@ -1,4 +1,22 @@
-{% for qcm in qcms %}
-    {{ qcm.description }}
-    <a href="{{ path('student_qcm', 'get', {'id': qcm.id}) }}">Faire le QCM</a> <br />
-{% endfor %}
+{% extends "Layouts/base.html.twig" %}
+
+{% block title %}Liste des QCMs{% endblock %}
+
+{% block content %}
+    <section class="qcm">
+        <div class="container">
+            <h1>Liste des QCMs</h1><br />
+
+            {% if qcm == null %}
+                Vous avez fait tous les QCMs.
+            {% endif %}
+
+            {% for qcm in qcms %}
+                {{ qcm.description }}
+                <a href="{{ path('student_qcm', 'get', {'id': qcm.id}) }}">Faire le QCM</a> <br />
+                <hr>
+            {% endfor %}
+        </div>
+    </section>
+
+{% endblock %}
