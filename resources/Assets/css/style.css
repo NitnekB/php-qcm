@@ -61,6 +61,15 @@ section a:hover {
     text-decoration: none;
 }
 
+.dark-button {
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid #0f0f0f;
+}
+
+.dark-button:hover {
+    border: 1px solid whitesmoke;
+}
+
 .base-form label {
     color: whitesmoke;
     margin-top: 15px;
@@ -174,4 +183,25 @@ section.topic {
 
 section.topic a {
     color: white;
+}
+
+.white-screen {
+    margin-top: 150px;
+    padding: 80px;
+    border-radius: 3px;
+    background-color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+}
+
+.white-screen p {
+    font-size: 20px;
+}
+
+.white-screen a {
+    color: darkgreen;
+    font-size: 19px;
+}
+
+.white-screen a:hover {
+    color: black;
 }

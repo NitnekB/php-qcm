@@ -1,8 +1,24 @@
-{{ qcm.description }}<br />
-{{ qcm.difficulty }}<br /><br />
+{% extends "Layouts/base.html.twig" %}
 
-{# think about layout to generalise qcm view #}
+{% block content %}
 
-{% for topic in topics %}
-    <a href="{{ path('qcm_questions', 'get', {'qcm_id': qcm.id, 'topic_id': topic.id}) }}">{{ topic.label }}</a><br />
-{% endfor %}
+    <div class="reg-pict" style="background-image: url({{ asset('images/pict4.jpg') }}); height: 100vh; width: 100%; background-size: cover;">
+        <div class="container">
+            <div class="white-screen">
+                <br />
+                <h1>Sélectionner vos questions</h1>
+                <br />
+                <hr>
+                <p>Nom du QCM : {{ qcm.description }}</p>
+                <p>Difficulté : {{ qcm.difficulty }}</p>
+                <hr>
+                {# think about layout to generalise qcm view #}
+                <br />
+                {% for topic in topics %}
+                    <a href="{{ path('qcm_questions', 'get', {'qcm_id': qcm.id, 'topic_id': topic.id}) }}">{{ topic.label }}</a><br />
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

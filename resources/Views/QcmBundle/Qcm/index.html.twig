@@ -30,7 +30,7 @@
                         {{ qcm.description }}
                     </h4>
                     <p class="title" style="float: left;">Difficulté : {{ qcm.difficulty }}</p>
-                    <a href="{{ path('qcm', 'get', {'id': qcm.id}) }}" style="float: right">Editer</a>
+                    <a class="button-style" href="{{ path('qcm', 'get', {'id': qcm.id}) }}" style="float: right; margin: 0px;">Editer</a>
 
                     <div style="clear: both"></div>
                     <hr>#}
@@ -38,7 +38,7 @@
 
                 <br />
 
-                <h3><a href="{{ path('new_qcm', 'get') }}" style="float: right;">Créer un nouveau qcm</a></h3>
+                <h3><a class="button-style dark-button" href="{{ path('new_qcm', 'get') }}" style="float: right;">Créer un nouveau QCM</a></h3>
             </div>
         </div>
     </section>
