@@ -1,8 +1,23 @@
-Question : {{ question.description }}<br />
+{% extends "Layouts/base.html.twig" %}
 
-{% for reply in question.replies %}
-    <a href="{{ path('student_qcm_response', 'get', {'id': qcm.id, 'question_id': question.id, 'reply_id': reply.id}) }}">
-        {{ reply.description }}
-    </a>
-    <br />
-{% endfor %}
+{% block title %}QCM : {{ qcm.description }}{% endblock %}
+
+{% block content %}
+    <section class="qcm">
+        <div class="container">
+            <h1>QCM : {{ qcm.description }}</h1><br />
+
+            <h4>> Question : {{ question.description }}</h4>
+
+            <hr>
+            <h5>Réponses</h5>
+
+            {% for reply in question.replies %}
+                <a href="{{ path('student_qcm_response', 'get', {'id': qcm.id, 'question_id': question.id, 'reply_id': reply.id}) }}">
+                    {{ reply.description }}
+                </a>
+                <br />
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}
