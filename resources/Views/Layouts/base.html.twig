@@ -16,15 +16,24 @@
                         <li>
                             <a class="page-scroll" href="/">EvalQcm</a>
                         </li>
-                        <li>
-                            <a class="page-scroll" href="">Les QCM</a>
-                        </li>
-                        <li>
-                            <a class="page-scroll" href="">Les questions</a>
-                        </li>
-                        <li>
-                            <a class="page-scroll" href="">Vos résultats</a>
-                        </li>
+
+                        {% if get_current_user().role == "ROLE_TEACHER" %}
+                            <li>
+                                <a class="page-scroll" href="{{ path('qcms') }}">Les QCM</a>
+                            </li>
+                            <li>
+                                <a class="page-scroll" href="">Les questions</a>
+                            </li>
+                        {% endif %}
+
+                        {% if get_current_user().role == "ROLE_STUDENT" %}
+                            <li>
+                                <a class="page-scroll" href="{{ path('student_qcms') }}">Les QCM</a>
+                            </li>
+                            <li>
+                                <a class="page-scroll" href="">Vos résultats</a>
+                            </li>
+                        {% endif %}
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         {% if get_current_user() == null %}

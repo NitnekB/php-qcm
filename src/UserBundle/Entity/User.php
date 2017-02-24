@@ -4,6 +4,8 @@ namespace UserBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use QcmBundle\Entity\Qcm;
+use QcmBundle\Entity\Reply;
 
 /**
  * User
@@ -56,6 +58,13 @@ class User
     private $qcmsCreated;
 
     /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="\QcmBundle\Entity\Qcm", mappedBy="students")
+     */
+    private $qcmsCompleted;
+
+    /**
      * @ORM\OneToMany(targetEntity="\QcmBundle\Entity\Question", mappedBy="author")
      */
     private $questions;
@@ -65,17 +74,15 @@ class User
      */
     private $replies;
 
-    private $qcmsParticipated;
-
     /**
      * User constructor.
      */
     public function __construct()
     {
         $this->qcmsCreated = new ArrayCollection();
-        $this->qcmsParticipated = new ArrayCollection();
         $this->replies = new ArrayCollection();
         $this->questions = new ArrayCollection();
+        $this->qcmsCompleted = new ArrayCollection();
     }
 
     /**
@@ -203,22 +210,6 @@ class User
     /**
      * @return ArrayCollection
      */
-    public function getQcmsParticipated()
-    {
-        return $this->qcmsParticipated;
-    }
-
-    /**
-     * @param mixed $qcmsParticipated
-     */
-    public function setQcmsParticipated($qcmsParticipated)
-    {
-        $this->qcmsParticipated = $qcmsParticipated;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getReplies()
     {
         return $this->replies;
@@ -230,6 +221,20 @@ class User
     public function setReplies($replies)
     {
         $this->replies = $replies;
+    }
+
+    /**
+     * @param Reply $reply
+     */
+    public function addReply($reply)
+    {
+        if (!$this->replies->contains($reply)) {
+            $this->replies->add($reply);
+        }
+
+        if (!$reply->getUsers()->contains($this)) {
+            $reply->addUser($this);
+        }
     }
 
     /**
@@ -260,5 +265,35 @@ class User
     public function setQuestions($questions)
     {
         $this->questions = $questions;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getQcmsCompleted()
+    {
+        return $this->qcmsCompleted;
+    }
+
+    /**
+     * @param ArrayCollection $qcmsCompleted
+     */
+    public function setQcmsCompleted(ArrayCollection $qcmsCompleted)
+    {
+        $this->qcmsCompleted = $qcmsCompleted;
+    }
+
+    /**
+     * @param Qcm $qcm
+     */
+    public function addQcmCompleted($qcm)
+    {
+        if(!$this->qcmsCompleted->contains($qcm)) {
+            $this->qcmsCompleted->add($qcm);
+        }
+
+        if(!$qcm->getStudents()->contains($this)) {
+            $qcm->addStudent($this);
+        }
     }
 }
