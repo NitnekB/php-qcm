@@ -117,6 +117,24 @@ qcm_add_question:
   controller: QcmBundle:QcmController:addQuestion
   method: GET
 
+
+######################## STUDENT ###########################
+
+student_qcms:
+  path: /student/qcms
+  controller: QcmBundle:StudentQcmController:index
+  method: GET
+
+student_qcm:
+  path: /student/qcm/:id
+  controller: QcmBundle:StudentQcmController:show
+  method: GET
+
+student_qcm_response:
+  path: /student/qcm/:id/question/:question_id/response/:reply_id
+  controller: QcmBundle:StudentQcmController:response
+  method: GET
+
 ############################################################
 ####################### OTHER ROUTE ########################
 ############################################################

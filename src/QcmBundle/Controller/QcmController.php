@@ -25,6 +25,8 @@ class QcmController extends Controller
      */
     public function index(Request $request, $params)
     {
+        $this->requireRole('TEACHER');
+
         $repo = new QcmRepository();
         $qcms = $repo->findAll();
 
@@ -42,6 +44,8 @@ class QcmController extends Controller
      */
     public function show(Request $request, $params)
     {
+        $this->requireRole('TEACHER');
+
         /** @var RoutingService $routing */
         $routing = $this->get('routing');
 

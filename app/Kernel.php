@@ -37,6 +37,7 @@ class Kernel extends Component
         $this->addBundles(new \QcmBundle\Controller\QuestionController());
         $this->addBundles(new \QcmBundle\Controller\ReplyController());
         $this->addBundles(new \QcmBundle\Controller\QcmController());
+        $this->addBundles(new \QcmBundle\Controller\StudentQcmController());
 
         return Kernel::$bundles;
     }

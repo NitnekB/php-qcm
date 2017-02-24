@@ -4,6 +4,7 @@ namespace QcmBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use UserBundle\Entity\User;
 
 /**
  * Qcm
@@ -48,6 +49,14 @@ class Qcm
      * @ORM\ManyToMany(targetEntity="Question", mappedBy="qcms")
      */
     private $questions;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="UserBundle\Entity\User", inversedBy="qcmsCompleted")
+     * @ORM\JoinTable(name="qcm_user")
+     */
+    private $students;
 
     public function __construct() {
         $this->questions = new ArrayCollection();
@@ -149,7 +158,7 @@ class Qcm
     }
 
     /**
-     * @return mixed
+     * @return ArrayCollection
      */
     public function getStudents()
     {
@@ -157,10 +166,24 @@ class Qcm
     }
 
     /**
-     * @param mixed $student
+     * @param $students
      */
     public function setStudents($students)
     {
         $this->students = $students;
+    }
+
+    /**
+     * @param User $student
+     */
+    public function addStudent($student)
+    {
+        if (!$this->students->contains($student)) {
+            $this->students->add($student);
+        }
+
+        if (!$student->getQcmsCompleted()->contains($this)) {
+            $student->addQcmCompleted($this);
+        }
     }
 }

@@ -4,6 +4,7 @@ namespace QcmBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use UserBundle\Entity\User;
 
 /**
  * Reply
@@ -109,7 +110,7 @@ class Reply
     }
 
     /**
-     * @return mixed
+     * @return Question
      */
     public function getQuestion()
     {
@@ -125,6 +126,36 @@ class Reply
 
         if(!$this->question->getReplies()->contains($this)) {
             $this->question->addReply($this);
+        }
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getUsers()
+    {
+        return $this->users;
+    }
+
+    /**
+     * @param ArrayCollection $users
+     */
+    public function setUsers($users)
+    {
+        $this->users = $users;
+    }
+
+    /**
+     * @param User $user
+     */
+    public function addUser($user)
+    {
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+        }
+
+        if (!$user->getReplies()->contains($this)) {
+            $user->addReply($this);
         }
     }
 }

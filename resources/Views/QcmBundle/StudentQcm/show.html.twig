@@ -1,0 +1,8 @@
+Question : {{ question.description }}<br />
+
+{% for reply in question.replies %}
+    <a href="{{ path('student_qcm_response', 'get', {'id': qcm.id, 'question_id': question.id, 'reply_id': reply.id}) }}">
+        {{ reply.description }}
+    </a>
+    <br />
+{% endfor %}
