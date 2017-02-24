@@ -160,11 +160,25 @@ class Question
     }
 
     /**
-     * @return mixed
+     * @return ArrayCollection
      */
     public function getQcms()
     {
         return $this->qcms;
+    }
+
+    /**
+     * @param Qcm $qcm
+     */
+    public function addQcm($qcm)
+    {
+        if (!$this->qcms->contains($qcm)) {
+            $this->qcms->add($qcm);
+        }
+
+        if (!$qcm->getQuestions()->contains($this)) {
+            $qcm->addQuestion($this);
+        }
     }
 
     /**

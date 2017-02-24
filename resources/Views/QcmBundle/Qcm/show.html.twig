@@ -1,0 +1,13 @@
+{{ qcm.description }}<br />
+Difficulté : {{ qcm.difficulty }}<br /><br />
+
+{% for question in qcm.questions %}
+    Themes : {{ question.topic.label }}<br />
+    Question : {{ question.description }}<br />
+    <a href="{{ path('question', 'get', {'topic_id': question.topic.id, 'question_id': question.id}) }}">
+        Editer
+    </a>
+    <br /><br />
+{% endfor %}
+
+<a href="{{ path('qcm_topics', 'get', {'qcm_id': qcm.id }) }}">Ajouter une question</a>

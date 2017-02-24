@@ -1,0 +1,8 @@
+{{ qcm.description }}<br />
+{{ qcm.difficulty }}<br /><br />
+
+{# think about layout to generalise qcm view #}
+
+{% for topic in topics %}
+    <a href="{{ path('qcm_questions', 'get', {'qcm_id': qcm.id, 'topic_id': topic.id}) }}">{{ topic.label }}</a><br />
+{% endfor %}
