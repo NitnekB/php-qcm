@@ -23,6 +23,24 @@
     width: 100%;
 }
 
+section a:hover {
+    text-decoration: none;
+}
+
+.line:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+    text-decoration: none;
+}
+
+.line {
+    border-bottom: 1px solid white;
+    padding: 5px 20px;
+}
+
+.line-first {
+    border-top: 1px solid white;
+}
+
 .title {
     color: whitesmoke;
 }

@@ -10,14 +10,22 @@
                 <h1 style="color: whitesmoke;">Topic : {{ topic.label }}</h1><br />
 
                 <h2 style="color: whitesmoke;">Question :</h2>
-                <hr>
                 {% for question in topic.questions %}
-                    <a href="{{ path('question', 'get', { 'topic_id': topic.id, 'question_id': question.id }) }}">{{ question.description }}</a><br />
+                    <a href="{{ path('question', 'get', { 'topic_id': topic.id, 'question_id': question.id }) }}">
+                        {% if loop.first %}
+                            <div class="line line-first">
+                        {% else %}
+                            <div class="line">
+                        {% endif %}
+                            <h4 class="title">
+                                {{ question.description }}
+                            </h4>
+                        </div>
+                    </a>
                 {% endfor %}
 
                 <br />
 
-                <hr>
                 <h2 style="color: whitesmoke;">Nouvelle question</h2>
 
                 <form action="{{ path(form.action, 'post', { 'topic_id': topic.id }) }}" method="post" class="topic-form">

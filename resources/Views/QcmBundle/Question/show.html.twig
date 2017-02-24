@@ -17,14 +17,16 @@
                 
                 <h3 class="title">Réponses : </h3>
 
-                <hr>
-
                 {% for key, reply in question.replies %}
-                    <h4 class="title">
-                        {{ key + 1 }}) {{ reply.description }}
-                    </h4>
-
-                    <hr />
+                    {% if loop.first %}
+                        <div class="line line-first">
+                    {% else %}
+                        <div class="line">
+                    {% endif %}
+                        <h4 class="title">
+                            {{ key + 1 }}) {{ reply.description }}
+                        </h4>
+                    </div>
                 {% endfor %}
 
                 <br />
