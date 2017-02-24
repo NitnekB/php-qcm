@@ -4,6 +4,7 @@
 
 {% block content %}
     <section class="qcm">
+        <div class="reg-pict" style="background-image: url({{ asset('images/pict6.jpg') }}); height: 100vh; width: 100%; background-size: cover;">
         <div class="container">
             <h1>QCM : {{ qcm.description }}</h1><br />
 
@@ -25,6 +26,7 @@
                     </div>
                 </a>
             {% endfor %}
+        </div>
         </div>
     </section>
 {% endblock %}

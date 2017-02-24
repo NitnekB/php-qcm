@@ -4,13 +4,9 @@
 
 {% block content %}
     <section class="qcm">
+        <div class="reg-pict" style="background-image: url({{ asset('images/pict6.jpg') }}); height: 100vh; width: 100%; background-size: cover;">
         <div class="container">
             <h1>Liste des QCMs</h1><br />
-
-            {% if qcm == null %}
-                Vous avez fait tous les QCMs.
-            {% endif %}
-
             {% for qcm in qcms %}
 
                 <a href="{{ path('student_qcm', 'get', {'id': qcm.id}) }}">
@@ -26,6 +22,7 @@
                 </a>
 
             {% endfor %}
+        </div>
         </div>
     </section>
 
