@@ -37,6 +37,12 @@
     width: auto;
 }
 
+.button-style:hover {
+    color: #0f0f0f;
+    background-color: whitesmoke;
+    text-decoration: none;
+}
+
 .base-form label {
     color: whitesmoke;
     margin-top: 15px;

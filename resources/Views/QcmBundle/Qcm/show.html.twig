@@ -1,13 +1,30 @@
-{{ qcm.description }}<br />
-Difficulté : {{ qcm.difficulty }}<br /><br />
+{% extends "Layouts/base.html.twig" %}
 
-{% for question in qcm.questions %}
-    Themes : {{ question.topic.label }}<br />
-    Question : {{ question.description }}<br />
-    <a href="{{ path('question', 'get', {'topic_id': question.topic.id, 'question_id': question.id}) }}">
-        Editer
-    </a>
-    <br /><br />
-{% endfor %}
 
-<a href="{{ path('qcm_topics', 'get', {'qcm_id': qcm.id }) }}">Ajouter une question</a>
+{% block content %}
+    <section class="topic">
+
+        <div class="reg-pict" style="background-image: url({{ asset('images/pict5.jpg') }}); height: 100vh; width: 100%; background-size: cover;">
+            <div class="container">
+                <br />
+                <h1>QCM</h1>
+                <div class="col-lg-12">
+                    {{ qcm.description }}<br />
+                    Difficulté : {{ qcm.difficulty }}<br /><br />
+
+                    {% for question in qcm.questions %}
+                        Themes : {{ question.topic.label }}<br />
+                        Question : {{ question.description }}<br />
+                        <a href="{{ path('question', 'get', {'topic_id': question.topic.id, 'question_id': question.id}) }}">
+                            Editer
+                        </a>
+                        <br /><br />
+                    {% endfor %}
+
+                    <a class="button-style" href="{{ path('qcm_topics', 'get', {'qcm_id': qcm.id }) }}">Ajouter une question</a>
+                </div>
+            </div>
+        </div>
+
+    </section>
+{% endblock %}
