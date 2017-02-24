@@ -8,7 +8,24 @@
         <div class="reg-pict" style="background-image: url({{ asset('images/pict7.jpg') }}); height: 100vh; width: 100%; background-size: cover;">
             <div class="container">
                 <br />
-                <h1 style="color: whitesmoke;">Thèmes</h1>
+                <h1 style="color: whitesmoke;">Thèmes</h1><br />
+
+                {% for topic in topics %}
+
+                    <a href="{{ path('topic', 'get', {'id': topic.id}) }}">
+                        {% if loop.first %}
+                            <div class="line line-first">
+                        {% else %}
+                            <div class="line">
+                        {% endif %}
+                            <h4 class="title">
+                                {{ topic.label }}
+                            </h4>
+                        </div>
+                    </a>
+                {% endfor %}<br/>
+
+                <h3><a class="button-style dark-button" href="{{ path('new_topic', 'get') }}" style="float: right; margin: 0px;">Créer un nouveau topic</a></h3>
             </div>
         </div>
 

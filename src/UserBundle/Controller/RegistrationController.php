@@ -78,6 +78,8 @@ class RegistrationController extends Controller
 
         $this->entityManager->persist($user);
         $this->entityManager->flush();
+
+        header('Location: ' . $routingService->path('home'));
     }
 
     public function toto(Request $request)

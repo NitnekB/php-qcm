@@ -1,16 +1,56 @@
-{{ question.description }}<br /><br />
+{% extends "Layouts/base.html.twig" %}
 
-{% for reply in question.replies %}
-    {{ reply.description }}<br />
-{% endfor %}
+{% block title %}Topic{% endblock %}
 
-<form action="{{ path(form.action, 'post', { 'topic_id': question.topic.id, 'question_id': question.id }) }}" method="post" class="base-form">
-    {% for key, value in form.fields %}
-        <label>{{ value.label }}</label><br />
-        <input name="{{key}}" type="{{ value.type }}"/><br />
-    {% endfor %}
+{% block content %}
+<section class="topic">
 
-    {% if form.submit %}
-        <input type="submit" value="{{ form.submit.label }}"/>
-    {% endif %}
-</form>
+    <div class="reg-pict" style="background-image: url({{ asset('images/pict7.jpg') }}); height: 100vh; width: 100%; background-size: cover;">
+        <div class="container">
+            <div class="col-lg-12">
+
+                <h1 class="title">Question n° {{ question.id }}</h1>
+
+                <h3 class="title">Ennoncé :</h3>
+                <h4 class="title">{{ question.description }}</h4>
+                <br />
+
+                <br /><br /><br />
+
+                <h3 class="title">Réponses : </h3>
+
+                {% for key, reply in question.replies %}
+                    {% if loop.first %}
+                        <div class="line line-first">
+                    {% else %}
+                        <div class="line">
+                    {% endif %}
+                        <h4 class="title">
+                            {{ key + 1 }}) {{ reply.description }}
+                        </h4>
+                    </div>
+                {% endfor %}
+
+                <br /><br /><br /><br /><br />
+            </div>
+
+            <div class="col-lg-6">
+
+                <h2 class="title">Nouvelle réponse</h2>
+
+                <form class="topic" action="{{ path(form.action, 'post', { 'topic_id': question.topic.id, 'question_id': question.id }) }}" method="post" class="base-form">
+                    {% for key, value in form.fields %}
+                        <label class="title">{{ value.label }} :</label>
+                        <input name="{{key}}" type="{{ value.type }}"/><br />
+                    {% endfor %}
+
+                    {% if form.submit %}
+                        <input type="submit" value="{{ form.submit.label }}" class="button-style"/>
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
