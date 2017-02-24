@@ -1,4 +1,32 @@
-{% for qcm in qcms %}
-    {{ qcm.description }} | {{ qcm.difficulty }}
-    <a href="{{ path('qcm', 'get', {'id': qcm.id}) }}">Editer</a> <br />
-{% endfor %}
+{% extends "Layouts/base.html.twig" %}
+
+{% block title %}Topic{% endblock %}
+
+{% block content %}
+    <section class="topic">
+
+        <div class="reg-pict" style="background-image: url({{ asset('images/pict7.jpg') }}); height: 100vh; width: 100%; background-size: cover;">
+            <div class="container">
+
+                <h1 class="title">Liste des QCMs</h1>
+
+                <br />
+
+                {% for qcm in qcms %}
+                    <h4 class="title">
+                        {{ qcm.description }}
+                    </h4>
+                    <p class="title" style="float: left;">Difficulté : {{ qcm.difficulty }}</p>
+                    <a href="{{ path('qcm', 'get', {'id': qcm.id}) }}" style="float: right">Editer</a>
+
+                    <div style="clear: both"></div>
+                    <hr>
+                {% endfor %}
+
+                <br />
+
+                <h3><a href="{{ path('new_qcm', 'get') }}" style="float: right;">Créer un nouveau qcm</a></h3>
+            </div>
+        </div>
+    </section>
+{% endblock %}
