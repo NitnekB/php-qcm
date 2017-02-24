@@ -11,10 +11,18 @@
                 <h1 style="color: whitesmoke;">Thèmes</h1><br />
 
                 {% for topic in topics %}
-                    <h4>
-                        <a href="{{ path('topic', 'get', {'id': topic.id}) }}">{{ topic.label }}</a>
-                    </h4>
-                    <hr>
+
+                    <a href="{{ path('topic', 'get', {'id': topic.id}) }}">
+                        {% if loop.first %}
+                            <div class="line line-first">
+                        {% else %}
+                            <div class="line">
+                        {% endif %}
+                            <h4 class="title">
+                                {{ topic.label }}
+                            </h4>
+                        </div>
+                    </a>
                 {% endfor %}<br/>
 
                 <h3><a href="{{ path('new_topic', 'get') }}" style="float: right;">Créer un nouveau topic</a></h3>

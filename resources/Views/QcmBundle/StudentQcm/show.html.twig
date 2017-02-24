@@ -7,16 +7,23 @@
         <div class="container">
             <h1>QCM : {{ qcm.description }}</h1><br />
 
-            <h4>> Question : {{ question.description }}</h4>
+            <h4> Question :<br /> {{ question.description }}</h4>
 
             <hr>
-            <h5>Réponses</h5>
+            <h4>Réponses</h4>
 
             {% for reply in question.replies %}
                 <a href="{{ path('student_qcm_response', 'get', {'id': qcm.id, 'question_id': question.id, 'reply_id': reply.id}) }}">
-                    {{ reply.description }}
+                    {% if loop.first %}
+                        <div class="line line-first">
+                    {% else %}
+                        <div class="line">
+                    {% endif %}
+                        <h4 class="title">
+                            {{ reply.description }}
+                        </h4>
+                    </div>
                 </a>
-                <br />
             {% endfor %}
         </div>
     </section>

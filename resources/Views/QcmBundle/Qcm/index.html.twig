@@ -12,15 +12,28 @@
 
                 <br />
 
-                {% for qcm in qcms %}
-                    <h4 class="title">
+                {% for key, qcm in qcms %}
+                    <a href="{{ path('qcm', 'get', {'id': qcm.id}) }}">
+                        {% if loop.first %}
+                            <div class="line line-first">
+                        {% else %}
+                            <div class="line">
+                        {% endif %}
+                            <h4 class="title">
+                                {{ key+1 }}) {{ qcm.description }}
+                            </h4>
+                                <p class="title">Difficulté : {{ qcm.difficulty }}</p>
+                            </div>
+                    </a>
+
+                    {#<h4 class="title">
                         {{ qcm.description }}
                     </h4>
                     <p class="title" style="float: left;">Difficulté : {{ qcm.difficulty }}</p>
                     <a href="{{ path('qcm', 'get', {'id': qcm.id}) }}" style="float: right">Editer</a>
 
                     <div style="clear: both"></div>
-                    <hr>
+                    <hr>#}
                 {% endfor %}
 
                 <br />
